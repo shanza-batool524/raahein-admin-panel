@@ -5,7 +5,6 @@ import '../models/driver_model.dart';
 import '../models/ride_model.dart';
 import '../models/complaint_model.dart';
 import '../models/dashboard_stats_model.dart';
-import '../models/system_settings_model.dart';
 import '../network/network_api_service.dart';
 
 class AdminRepository {
@@ -195,33 +194,6 @@ class AdminRepository {
       return DashboardStatsModel.fromJson(response);
     } catch (e) {
       log("💥 getDashboardStats Error: $e");
-      rethrow;
-    }
-  }
-
-  Future<SystemSettingsModel> getSystemSettings() async {
-    try {
-      final response = await _apiService.getApi(
-        url: AppUrl.getSystemSettingsApi,
-        isHeaderRequired: true,
-      );
-      return SystemSettingsModel.fromJson(response);
-    } catch (e) {
-      log("💥 getSystemSettings Error: $e");
-      rethrow;
-    }
-  }
-
-  Future<dynamic> updateSystemSettings(Map<String, dynamic> data) async {
-    try {
-      final response = await _apiService.putApi(
-        url: AppUrl.updateSystemSettingsApi,
-        data: data,
-        isHeaderRequired: true,
-      );
-      return response;
-    } catch (e) {
-      log("💥 updateSystemSettings Error: $e");
       rethrow;
     }
   }

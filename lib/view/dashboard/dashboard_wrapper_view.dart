@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/admin_controller.dart';
+import '../../controllers/fare_controller.dart';
 import '../layouts/responsive_layout.dart';
 
 import 'home_view.dart';
@@ -8,7 +9,11 @@ import '../users/users_view.dart';
 import '../drivers/drivers_view.dart';
 import '../rides/rides_view.dart';
 import '../complaints/complaints_view.dart';
-import '../settings/settings_view.dart';
+import '../routes/add_route_view.dart';
+import '../routes/all_routes_view.dart';
+import '../fares/add_fare_view.dart';
+import '../fares/preview_fare_table_view.dart';
+import '../fares/bulk_upload_fares_view.dart';
 
 class DashboardWrapperView extends StatefulWidget {
   const DashboardWrapperView({super.key});
@@ -20,8 +25,9 @@ class DashboardWrapperView extends StatefulWidget {
 class _DashboardWrapperViewState extends State<DashboardWrapperView> {
   int _selectedIndex = 0;
   
-  // Register Controller
+  // Register Controllers
   final AdminController adminController = Get.put(AdminController());
+  final FareController fareController = Get.put(FareController());
 
   final List<Widget> _screens = [
     const HomeView(),
@@ -29,7 +35,11 @@ class _DashboardWrapperViewState extends State<DashboardWrapperView> {
     const DriversView(),
     const RidesView(),
     const ComplaintsView(),
-    const SettingsView(),
+    const AddRouteView(),
+    const AllRoutesView(),
+    const AddFareView(),
+    const PreviewFareTableView(),
+    const BulkUploadFaresView(),
   ];
 
   final List<NavigationRailDestination> _navDestinations = const [
@@ -59,9 +69,29 @@ class _DashboardWrapperViewState extends State<DashboardWrapperView> {
       label: Text('Complaints'),
     ),
     NavigationRailDestination(
-      icon: Icon(Icons.settings_outlined),
-      selectedIcon: Icon(Icons.settings),
-      label: Text('Settings'),
+      icon: Icon(Icons.add_road_outlined),
+      selectedIcon: Icon(Icons.add_road),
+      label: Text('Add Route'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.route_outlined),
+      selectedIcon: Icon(Icons.route),
+      label: Text('All Routes'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.paid_outlined),
+      selectedIcon: Icon(Icons.paid),
+      label: Text('Add Fare'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.table_view_outlined),
+      selectedIcon: Icon(Icons.table_view),
+      label: Text('Preview Fares'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.upload_file_outlined),
+      selectedIcon: Icon(Icons.upload_file),
+      label: Text('Bulk Upload'),
     ),
   ];
 

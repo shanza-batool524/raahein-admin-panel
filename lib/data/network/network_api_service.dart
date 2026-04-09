@@ -134,11 +134,14 @@ class NetworkApiService extends BaseApiServices {
         headerMap["Authorization"] = 'Bearer $token';
       }
 
+      log("🌐 PUT URL: $url");
+      log("📦 PUT Data: ${jsonEncode(data)}");
       final response = await http
           .put(Uri.parse(url), body: jsonEncode(data), headers: headerMap)
           .timeout(const Duration(seconds: 10));
 
       responseJson = returnResponse(response);
+      log("✅ PUT Response: $responseJson");
       return responseJson;
     } on SocketException {
       throw InternetException('');
@@ -164,11 +167,14 @@ class NetworkApiService extends BaseApiServices {
         headerMap["Authorization"] = 'Bearer $token';
       }
 
+      log("🌐 DELETE URL: $url");
       final response = await http
           .delete(Uri.parse(url), headers: headerMap)
           .timeout(const Duration(seconds: 10));
 
-      return returnResponse(response);
+      final res = returnResponse(response);
+      log("✅ DELETE Response: $res");
+      return res;
     } on SocketException {
       throw InternetException('');
     } on TimeoutException {

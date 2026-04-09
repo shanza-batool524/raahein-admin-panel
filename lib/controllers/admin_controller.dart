@@ -5,7 +5,6 @@ import '../data/models/driver_model.dart';
 import '../data/models/ride_model.dart';
 import '../data/models/complaint_model.dart';
 import '../data/models/dashboard_stats_model.dart';
-import '../data/models/system_settings_model.dart';
 import '../data/repository/admin_repository.dart';
 
 class AdminController extends GetxController {
@@ -20,7 +19,6 @@ class AdminController extends GetxController {
   var complaintsList = <ComplaintModel>[].obs;
   
   var dashboardStats = Rxn<DashboardStatsModel>();
-  var systemSettings = Rxn<SystemSettingsModel>();
 
   // Fetch Dashboard Stats
   Future<void> fetchDashboardStats() async {
@@ -127,28 +125,7 @@ class AdminController extends GetxController {
     }
   }
 
-  // Fetch System Settings
-  Future<void> fetchSystemSettings() async {
-    _setLoading(true);
-    try {
-      final settings = await _repository.getSystemSettings();
-      systemSettings.value = settings;
-    } catch (e) {
-      _showError("Failed to fetch settings", e);
-    } finally {
-      _setLoading(false);
-    }
-  }
 
-  Future<void> updateSystemSettings(Map<String, dynamic> data) async {
-    try {
-      await _repository.updateSystemSettings(data);
-      await fetchSystemSettings();
-      _showSuccess("System settings updated");
-    } catch (e) {
-      _showError("Failed to update settings", e);
-    }
-  }
 
   // Helpers
   void _setLoading(bool value) {

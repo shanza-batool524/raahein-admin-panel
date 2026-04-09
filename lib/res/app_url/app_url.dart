@@ -28,7 +28,12 @@ class AppUrl {
   // Dashboard stats
   static const String getDashboardStatsApi = '$adminBaseUrl/dashboard';
 
-  // Settings
-  static const String getSystemSettingsApi = '$adminBaseUrl/settings';
-  static const String updateSystemSettingsApi = '$adminBaseUrl/settings';
+  // Fares
+  static const String createRouteApi = '$baseUrl/fares/routes';
+  static String updateRouteApi(int id) => '$baseUrl/fares/routes/$id';
+  static String deleteRouteApi(int id) => '$baseUrl/fares/routes/$id';
+  static const String addFareApi = '$baseUrl/fares';
+  static String previewFareTableApi(int id) => '$baseUrl/fares/routes/$id/preview';
+  static const String bulkUploadFaresApi = '$baseUrl/fares/bulk';
+  static String deleteFareApi(int id) => '$baseUrl/fares/$id';
 }
